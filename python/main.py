@@ -5,14 +5,13 @@ from fastapi import FastAPI, Request, Response
 from chat import get_markdown_content, built_content_docs
 from starlette.responses import FileResponse
 import os
-
-openai_model= os.getenv("OPENAI_MODEL")
+import uvicorn
 
 app = FastAPI()
 
 @app.post("/translate")
 async def trans_md(current_language: str, document_url: str):
-    content = built_content_docs(model=openai_model,language=current_language, text=get_markdown_content(document_url))
+    content = built_content_docs(language=current_language, text=get_markdown_content(document_url))
     
     file_object = io.BytesIO(content.encode())
 
@@ -24,6 +23,10 @@ async def trans_md(current_language: str, document_url: str):
 
     return response
 
+@app.get('/')
+async def root():
+    return {"message": "Hello World"}
+
 
 if __name__ == "__main__":
-    uvicorn.run(app, worker=4 ,host="0.0.0.0", port=8000)
+    uvicorn.run(app ,host="0.0.0.0", port=8000)

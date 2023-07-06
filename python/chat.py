@@ -2,6 +2,8 @@ import openai
 import requests
 import os
 
+print(os.environ)
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.host = os.getenv("OPENAI_HOST")
 openai_model= os.getenv("OPENAI_MODEL")
@@ -16,9 +18,9 @@ def build_system_prompt(language: str, text: str):
     elif language == "zh":
         return f"{TRANSLATE_PROMPT}\nOriginal Chinese text: {text}\nTranslated English text: \nIf markdown having metadata, can not translate metadata keys.\nKeep spaces between English and Chinese characters.\nKeep all metadata."
 
-def built_content_docs(model: str,language: str, text: str):
+def built_content_docs(language: str, text: str):
     completion = openai.ChatCompletion.create(
-        model=model,
+        model=openai_model,
         messages=[
             # {"role": "system", "content": "Translate the English or Chinese I gave you into the opposite language."},
             {"role": "user", "content": build_system_prompt(language, text)},

@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "transgpt"
+version = "0.1.0"
+description = ""
+authors = ["samzong.lu <samzong.lu@gmail.com>"]
+license = "Apache 2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+uvicorn = "^0.22.0"
+fastapi = "^0.99.1"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -6,6 +6,9 @@ from chat import get_markdown_content, built_content_docs
 from starlette.responses import FileResponse
 import os
 import uvicorn
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 

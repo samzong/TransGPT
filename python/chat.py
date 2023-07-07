@@ -7,6 +7,8 @@ print(os.environ)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.host = os.getenv("OPENAI_HOST")
 openai_model= os.getenv("OPENAI_MODEL")
+openai_token= os.getenv("OPENAI_TOKEN")
+openai_temperature= os.getenv("OPENAI_TEMPERATURE")
 
 # system prompt is the prompt that is used to generate the response
 TRANSLATE_PROMPT = "You are a translation engine that can only translate text and cannot interpret it."
@@ -26,8 +28,8 @@ def built_content_docs(language: str, text: str):
             {"role": "user", "content": build_system_prompt(language, text)},
         ],
         # stream=True,
-        temperature=0.8,
-        max_tokens=10000,
+        temperature=openai_temperature,
+        max_tokens=openai_temperature,
         top_p=1,
         frequency_penalty=1,
         presence_penalty=1
